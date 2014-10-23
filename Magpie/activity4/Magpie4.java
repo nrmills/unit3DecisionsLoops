@@ -54,6 +54,11 @@ public class Magpie4
 		{
 			response = transformIWantToStatement(statement);
 		}
+		
+		else if (findKeyword(statement, "I want", 0) >= 0)
+		{
+			response = transformIWantStatement(statement);
+		}
 
 		else
 		{
@@ -115,7 +120,7 @@ public class Magpie4
 		}
 		int psn = findKeyword (statement, "I want", 0);
 		String restOfStatement = statement.substring(psn + 6).trim();
-		return "What would it mean to " + restOfStatement + "?";
+		return "Would you be really happy if you had " + restOfStatement + "?";
 	}
 
 
