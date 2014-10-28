@@ -8,11 +8,31 @@ public class FindFirstMatch
     public static void main(String[] args)
     {
         Scanner in = new Scanner(System.in);
-        int firstOcurrence;
+        String statement;
+        int index = 0;
+        char ch = 'e';
 
+        //inputs the string to search in
         System.out.print("Enter a string: ");
-        String statement = in.next();
-        
+        statement = in.nextLine();
 
+        while (index < statement.length())
+        {
+            ch = statement.charAt( index );
+            if (ch == ' ')
+            {
+                break;
+            }
+            index++;
+        }
+
+        if (ch == ' ')
+        {
+            System.out.println("Index of first space: " + index);
+        }
+        else
+        {
+            System.out.println("Specified character is not found");
+        }
     }
 }
