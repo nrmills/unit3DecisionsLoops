@@ -8,20 +8,17 @@ public class SwapLetters
         System.out.print("Enter a word:");
         String word = in.next();
         Random random = new Random();
+        int length = word.length();
         int x = 0;
-        while (x<=word.length())
+        while (x<=length)
         {           
-            int j = random.nextInt(word.length()-1);
-            if (j==0)
-            {
-                j++;
-            }
-            int i = random.nextInt(j); 
+            int j = random.nextInt(word.length()-2)+2;
+            int i = random.nextInt(j);
             String first = word.substring(0,i);
-            String middle = word.substring(i,j);
-            String last = word.substring(j,word.length());
-            word = first + word.charAt(j) + middle + word.charAt(i) + last;
-            x++;
+            String middle = word.substring(i+1,j);
+            String last = word.substring(j+1,word.length());
+            word = first + word.charAt(j) + middle + word.charAt(i) + last; 
+            x+= 1;
         }
         System.out.println(word);        
     }
