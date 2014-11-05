@@ -1,8 +1,8 @@
 #BlueJ package file
 objectbench.height=76
-objectbench.width=659
+objectbench.width=412
 package.editor.height=400
-package.editor.width=561
+package.editor.width=314
 package.editor.x=3
 package.editor.y=148
 package.numDependencies=0
@@ -49,9 +49,9 @@ target3.width=100
 target3.x=70
 target3.y=10
 target4.editor.height=1010
-target4.editor.width=903
-target4.editor.x=777
-target4.editor.y=0
+target4.editor.width=917
+target4.editor.x=367
+target4.editor.y=23
 target4.height=50
 target4.name=Diamond
 target4.naviview.expanded=true
