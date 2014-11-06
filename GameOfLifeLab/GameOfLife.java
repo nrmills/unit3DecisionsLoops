@@ -22,9 +22,9 @@ public class GameOfLife
     private final int COLS = 5;
     
     // constants for the location of the three cells initially alive
-    private final int X1 = 0, Y1 = 2;
-    private final int X2 = 2, Y2 = 0;
-    private final int X3 = 2, Y3 = 1;
+    private final int X1 = 0, Y1 = 0;
+    private final int X2 = 0, Y2 = 1;
+    private final int X3 = 1, Y3 = 0;
 
     /**
      * Default constructor for objects of class GameOfLife

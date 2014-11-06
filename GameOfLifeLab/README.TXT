@@ -1,3 +1,31 @@
+Finalized Requirements:
+Q1: How large is the Grid? Is it boundless?
+A1: 100x100, no.
+
+Q2: What do the live cells look like?
+A2: Green Blips.
+
+Q3: What do dead cells look like? 
+A3: Null, or a blank box
+
+Q4: What pattern is displayed? are multiple patterns available?
+are patterns chosen in code, chosen randomly, chosen by user?
+A4: Chosen by user.
+
+Q5: How long does the game run? does it run forever? Does it prompt
+the user to continue?
+A5: Depends on user input
+
+Q6: What is the time interval between generations?
+A6: 3/4ths of a second.
+
+Q7: What about edge cases? does it wrap around?
+A7: The edge is treated like the end of the world, cells cannot progress past it.
+
+
+
+
+
 Introduction
 
 The goal of this lab is to apply your understanding of decision and loop
