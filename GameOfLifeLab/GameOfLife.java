@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Rock;
@@ -16,11 +17,11 @@ public class GameOfLife
 {
     // the world comprised of the grid that displays the graphics for the game
     private ActorWorld world;
-    
+
     // the game board will have 5 rows and 5 columns
-    private final int ROWS = 5;
-    private final int COLS = 5;
-    
+    private final int ROWS = 100;
+    private final int COLS = 100;
+
     // constants for the location of the three cells initially alive
     private final int X1 = 0, Y1 = 0;
     private final int X2 = 0, Y2 = 1;
@@ -36,18 +37,18 @@ public class GameOfLife
     {
         // create the grid, of the specified size, that contains Actors
         BoundedGrid<Actor> grid = new BoundedGrid<Actor>(ROWS, COLS);
-        
+
         // create a world based on the grid
         world = new ActorWorld(grid);
-        
+
         // populate the game
         populateGame();
-        
+
         // display the newly constructed and populated world
         world.show();
-        
+
     }
-    
+
     /**
      * Creates the actors and inserts them into their initial starting positions in the grid
      *
@@ -60,19 +61,21 @@ public class GameOfLife
         // the grid of Actors that maintains the state of the game
         //  (alive cells contains actors; dead cells do not)
         Grid<Actor> grid = world.getGrid();
-        
+
         // create and add rocks (a type of Actor) to the three intial locations
         Rock rock1 = new Rock();
         Location loc1 = new Location(X1, Y1);
         grid.put(loc1, rock1);
-        
+
         Rock rock2 = new Rock();
         Location loc2 = new Location(X2, Y2);
         grid.put(loc2, rock2);
-        
+
         Rock rock3 = new Rock();
         Location loc3 = new Location(X3, Y3);
         grid.put(loc3, rock3);
+        ArrayList arrayFormat = new ArrayList( loc1,loc2,loc3 );
+        System.out.println(arrayFormat);
     }
 
     /**
@@ -88,14 +91,28 @@ public class GameOfLife
         /** You will need to read the documentation for the World, Grid, and Location classes
          *      in order to implement the Game of Life algorithm and leverage the GridWorld framework.
          */
-        
+
         // create the grid, of the specified size, that contains Actors
         Grid<Actor> grid = world.getGrid();
-        
-        // insert magic here...
-        
+
+        for (int numRow=0; numRow<=world.getNumRows();numRow++)
+        {
+            for(int numCol=0; numCol<=world.getNumCols();numCol++)
+            {
+                Location loc = new Location(numRow,numCol);
+                boolean state = world.isValid(loc);
+                if (state == true)
+                {
+                    ArrayList<Location> validCellCount = world.getValidAdjacentLocations(loc);
+                    for ()
+                    {
+                    }
+                }
+            }
+        }
+
     }
-    
+
     /**
      * Returns the actor at the specified row and column. Intended to be used for unit testing.
      *
@@ -120,7 +137,7 @@ public class GameOfLife
     {
         return ROWS;
     }
-    
+
     /**
      * Returns the number of columns in the game board
      *
@@ -130,8 +147,7 @@ public class GameOfLife
     {
         return COLS;
     }
-    
-    
+
     /**
      * Creates an instance of this class. Provides convenient execution.
      *
