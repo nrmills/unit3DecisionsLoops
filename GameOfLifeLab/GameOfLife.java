@@ -23,9 +23,15 @@ public class GameOfLife
     private final int COLS = 100;
 
     // constants for the location of the three cells initially alive
-    private final int X1 = 0, Y1 = 0;
-    private final int X2 = 0, Y2 = 1;
-    private final int X3 = 1, Y3 = 0;
+    private final int X1 = 5, Y1 = 5;
+    private final int X2 = 6, Y2 = 5;
+    private final int X3 = 7, Y3 = 5;
+    private final int X4 = 5, Y4 = 6;
+    private final int X5 = 6, Y5 = 6;
+    private final int X6 = 7, Y6 = 6;
+    private final int X7 = 5, Y7 = 7;
+    private final int X8 = 6, Y8 = 7;
+    private final int X9 = 7, Y9 = 7;
 
     /**
      * Default constructor for objects of class GameOfLife
@@ -62,7 +68,7 @@ public class GameOfLife
         //  (alive cells contains actors; dead cells do not)
         Grid<Actor> grid = world.getGrid();
 
-        // create and add rocks (a type of Actor) to the three intial locations
+        // create and add rocks (a type of Actor) to the nine intial locations
         Rock rock1 = new Rock();
         Location loc1 = new Location(X1, Y1);
         grid.put(loc1, rock1);
@@ -74,8 +80,30 @@ public class GameOfLife
         Rock rock3 = new Rock();
         Location loc3 = new Location(X3, Y3);
         grid.put(loc3, rock3);
-        ArrayList arrayFormat = new ArrayList( loc1,loc2,loc3 );
-        System.out.println(arrayFormat);
+        
+        Rock rock4 = new Rock();
+        Location loc4 = new Location(X4, Y4);
+        grid.put(loc4, rock4);
+
+        Rock rock5 = new Rock();
+        Location loc5 = new Location(X5, Y5);
+        grid.put(loc5, rock5);
+
+        Rock rock6 = new Rock();
+        Location loc6 = new Location(X6, Y6);
+        grid.put(loc6, rock6);
+        
+        Rock rock7 = new Rock();
+        Location loc7 = new Location(X7, Y7);
+        grid.put(loc7, rock7);
+
+        Rock rock8 = new Rock();
+        Location loc8 = new Location(X8, Y8);
+        grid.put(loc8, rock8);
+
+        Rock rock9 = new Rock();
+        Location loc9 = new Location(X9, Y9);
+        grid.put(loc9, rock9);
     }
 
     /**
@@ -90,27 +118,53 @@ public class GameOfLife
     {
         /** You will need to read the documentation for the World, Grid, and Location classes
          *      in order to implement the Game of Life algorithm and leverage the GridWorld framework.
+         *
+         *Rules:
+         *1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+         *2. Any live cell with two or three live neighbours lives on to the next generation.
+         *3. Any live cell with more than three live neighbours dies, as if by overcrowding.
+         *4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.  
+         *
          */
 
+        
         // create the grid, of the specified size, that contains Actors
+        //BoundedGrid<Actor> newGeneration = new BoundedGrid<Actor>(ROWS, COLS);
+        
         Grid<Actor> grid = world.getGrid();
-
-        for (int numRow=0; numRow<=world.getNumRows();numRow++)
+        Grid<Actor>newGeneration = grid;
+        for (int numRow=0; numRow<=grid.getNumRows();numRow++)
         {
-            for(int numCol=0; numCol<=world.getNumCols();numCol++)
+            for(int numCol=0; numCol<=grid.getNumCols();numCol++)
             {
                 Location loc = new Location(numRow,numCol);
-                boolean state = world.isValid(loc);
+                boolean state = grid.isValid(loc);
                 if (state == true)
                 {
-                    ArrayList<Location> validCellCount = world.getValidAdjacentLocations(loc);
-                    for ()
+                    //Executes once outer for loops find a valid cell
+                    for (int microRow= loc.getRow()-1; microRow<=numRow+2;microRow++)
                     {
+                        for (int microCol=loc.getCol()-1; microCol<=numCol+2;microCol++)
+                        {
+                            Location microLocation= new Location(microCol,microRow);
+                            if (grid.getValidAdjacentLocations(microLocation).size() == 3
+                                    && grid.isValid(microLocation) == false)
+                            {
+                                Rock newRock = new Rock();
+                                newGeneration.put(microLocation,newRock);
+                            }
+                            else if (grid.getValidAdjacentLocations(microLocation).size() > 3
+                                    || grid.getValidAdjacentLocations(microLocation).size() < 2
+                                    && grid.isValid(microLocation) == true)
+                            {
+                                newGeneration.remove(microLocation);
+                            }
+                        }
                     }
                 }
             }
         }
-
+        grid = newGeneration;
     }
 
     /**
@@ -152,9 +206,14 @@ public class GameOfLife
      * Creates an instance of this class. Provides convenient execution.
      *
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws InterruptedException
     {
         GameOfLife game = new GameOfLife();
+        for (int x=0;x<10;x++)
+        {
+            Thread.sleep(500);
+            game.createNextGeneration();
+        }
     }
 
 }
