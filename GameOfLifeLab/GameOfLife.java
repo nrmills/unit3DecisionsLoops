@@ -80,7 +80,7 @@ public class GameOfLife
         Rock rock3 = new Rock();
         Location loc3 = new Location(X3, Y3);
         grid.put(loc3, rock3);
-        
+
         Rock rock4 = new Rock();
         Location loc4 = new Location(X4, Y4);
         grid.put(loc4, rock4);
@@ -92,7 +92,7 @@ public class GameOfLife
         Rock rock6 = new Rock();
         Location loc6 = new Location(X6, Y6);
         grid.put(loc6, rock6);
-        
+
         Rock rock7 = new Rock();
         Location loc7 = new Location(X7, Y7);
         grid.put(loc7, rock7);
@@ -127,46 +127,26 @@ public class GameOfLife
          *
          */
 
-        
         // create the grid, of the specified size, that contains Actors
-        //BoundedGrid<Actor> newGeneration = new BoundedGrid<Actor>(ROWS, COLS);
-        
+
         Grid<Actor> grid = world.getGrid();
-        Grid<Actor>newGeneration = grid;
-        for (int numRow=0; numRow<=grid.getNumRows();numRow++)
+        BoundedGrid<Actor> nextGrid = new BoundedGrid<Actor>(ROWS, COLS);
+        for (int numRow=0; numRow<grid.getNumRows();numRow++)
         {
-            for(int numCol=0; numCol<=grid.getNumCols();numCol++)
+            for(int numCol=0; numCol<grid.getNumCols();numCol++)
             {
                 Location loc = new Location(numRow,numCol);
-                boolean state = grid.isValid(loc);
-                if (state == true)
+                if (grid.get(loc) != null 
+                    && grid.getOccupiedAdjacentLocations(loc).size() == 3)
                 {
-                    //Executes once outer for loops find a valid cell
-                    for (int microRow= loc.getRow()-1; microRow<=numRow+2;microRow++)
-                    {
-                        for (int microCol=loc.getCol()-1; microCol<=numCol+2;microCol++)
-                        {
-                            Location microLocation= new Location(microCol,microRow);
-                            if (grid.getValidAdjacentLocations(microLocation).size() == 3
-                                    && grid.isValid(microLocation) == false)
-                            {
-                                Rock newRock = new Rock();
-                                newGeneration.put(microLocation,newRock);
-                            }
-                            else if (grid.getValidAdjacentLocations(microLocation).size() > 3
-                                    || grid.getValidAdjacentLocations(microLocation).size() < 2
-                                    && grid.isValid(microLocation) == true)
-                            {
-                                newGeneration.remove(microLocation);
-                            }
-                        }
-                    }
+                    Rock newRock = new Rock();
+                    nextGrid.put(loc,newRock);
+                }
                 }
             }
+        grid = nextGrid;
         }
-        grid = newGeneration;
-    }
-
+        
     /**
      * Returns the actor at the specified row and column. Intended to be used for unit testing.
      *
@@ -209,9 +189,10 @@ public class GameOfLife
     public static void main(String[] args) throws InterruptedException
     {
         GameOfLife game = new GameOfLife();
+        
         for (int x=0;x<10;x++)
         {
-            Thread.sleep(500);
+            //Thread.sleep(1000);
             game.createNextGeneration();
         }
     }
