@@ -46,7 +46,7 @@ public class GameOfLife
 
         // create a world based on the grid
         world = new ActorWorld(grid);
-
+        
         // populate the game
         populateGame();
 
@@ -127,24 +127,30 @@ public class GameOfLife
          *
          */
 
-        // create the grid, of the specified size, that contains Actors
-
         Grid<Actor> grid = world.getGrid();
-        BoundedGrid<Actor> nextGrid = new BoundedGrid<Actor>(ROWS, COLS);
+        BoundedGrid<Actor> newGrid = new BoundedGrid<Actor>(ROWS, COLS);
         for (int numRow=0; numRow<grid.getNumRows();numRow++)
         {
             for(int numCol=0; numCol<grid.getNumCols();numCol++)
             {
                 Location loc = new Location(numRow,numCol);
-                if (grid.get(loc) != null 
+                if (grid.get(loc) == null 
                     && grid.getOccupiedAdjacentLocations(loc).size() == 3)
                 {
                     Rock newRock = new Rock();
-                    nextGrid.put(loc,newRock);
+                    newGrid.put(loc,newRock);
+                }
+                else if (grid.get(loc) != null 
+                    && grid.getOccupiedAdjacentLocations(loc).size() == 3 
+                    || grid.getOccupiedAdjacentLocations(loc).size() == 2)
+                {
+                    Rock newRock = new Rock();
+                    newGrid.put(loc,newRock);
                 }
                 }
             }
-        grid = nextGrid;
+        //Copy the Grid
+        world.setGrid(newGrid);
         }
         
     /**
@@ -192,7 +198,7 @@ public class GameOfLife
         
         for (int x=0;x<10;x++)
         {
-            //Thread.sleep(1000);
+            Thread.sleep(1000);
             game.createNextGeneration();
         }
     }
