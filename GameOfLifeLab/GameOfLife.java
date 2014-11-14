@@ -19,19 +19,26 @@ public class GameOfLife
     private ActorWorld world;
 
     // the game board will have 5 rows and 5 columns
-    private final int ROWS = 100;
-    private final int COLS = 100;
+    private final int ROWS = 36;
+    private final int COLS = 36;
 
-    // constants for the location of the three cells initially alive
-    private final int X1 = 5, Y1 = 5;
-    private final int X2 = 6, Y2 = 5;
-    private final int X3 = 7, Y3 = 5;
-    private final int X4 = 5, Y4 = 6;
-    private final int X5 = 6, Y5 = 6;
-    private final int X6 = 7, Y6 = 6;
-    private final int X7 = 5, Y7 = 7;
-    private final int X8 = 6, Y8 = 7;
-    private final int X9 = 7, Y9 = 7;
+    // 3x3 Block Pattern
+    private final int X1 = 15, Y1 = 17;
+    private final int X2 = 16, Y2 = 17;
+    private final int X3 = 17, Y3 = 17;
+    private final int X4 = 15, Y4 = 18;
+    private final int X5 = 16, Y5 = 18;
+    private final int X6 = 17, Y6 = 18;
+    private final int X7 = 15, Y7 = 19;
+    private final int X8 = 16, Y8 = 19;
+    private final int X9 = 17, Y9 = 19;
+
+    // Test Pattern
+    //private final int X1 = 0, Y1 = 0;
+    //private final int X2 = 1, Y2 = 0;
+    //private final int X3 = 0, Y3 = 1;
+    //private final int X4 = 2, Y4 = 1;
+    //private final int X5 = 1, Y5 = 2;
 
     /**
      * Default constructor for objects of class GameOfLife
@@ -46,7 +53,7 @@ public class GameOfLife
 
         // create a world based on the grid
         world = new ActorWorld(grid);
-        
+
         // populate the game
         populateGame();
 
@@ -114,7 +121,7 @@ public class GameOfLife
      * @post    the world has been populated with a new grid containing the next generation
      * 
      */
-    private void createNextGeneration()
+    public void createNextGeneration()
     {
         /** You will need to read the documentation for the World, Grid, and Location classes
          *      in order to implement the Game of Life algorithm and leverage the GridWorld framework.
@@ -135,24 +142,24 @@ public class GameOfLife
             {
                 Location loc = new Location(numRow,numCol);
                 if (grid.get(loc) == null 
-                    && grid.getOccupiedAdjacentLocations(loc).size() == 3)
+                && grid.getOccupiedAdjacentLocations(loc).size() == 3)
                 {
                     Rock newRock = new Rock();
                     newGrid.put(loc,newRock);
                 }
                 else if (grid.get(loc) != null 
-                    && grid.getOccupiedAdjacentLocations(loc).size() == 3 
-                    || grid.getOccupiedAdjacentLocations(loc).size() == 2)
+                && grid.getOccupiedAdjacentLocations(loc).size() == 3 
+                || grid.getOccupiedAdjacentLocations(loc).size() == 2)
                 {
                     Rock newRock = new Rock();
                     newGrid.put(loc,newRock);
                 }
-                }
             }
+        }
         //Copy the Grid
         world.setGrid(newGrid);
-        }
-        
+    }
+
     /**
      * Returns the actor at the specified row and column. Intended to be used for unit testing.
      *
@@ -195,10 +202,10 @@ public class GameOfLife
     public static void main(String[] args) throws InterruptedException
     {
         GameOfLife game = new GameOfLife();
-        
-        for (int x=0;x<10;x++)
+
+        for (int x=0;x<50;x++)
         {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             game.createNextGeneration();
         }
     }
