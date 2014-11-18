@@ -141,15 +141,22 @@ public class GameOfLife
             for(int numCol=0; numCol<grid.getNumCols();numCol++)
             {
                 Location loc = new Location(numRow,numCol);
-                if (grid.get(loc) == null 
-                && grid.getOccupiedAdjacentLocations(loc).size() == 3)
+                
+                if (grid.get(loc) != null
+                && (grid.getOccupiedAdjacentLocations(loc).size() > 3 
+                || grid.getOccupiedAdjacentLocations(loc).size() < 2))
+                {
+                    newGrid.remove(loc);
+                }
+                else if (grid.get(loc) != null 
+                && (grid.getOccupiedAdjacentLocations(loc).size() == 3 
+                || grid.getOccupiedAdjacentLocations(loc).size() == 2))
                 {
                     Rock newRock = new Rock();
                     newGrid.put(loc,newRock);
                 }
-                else if (grid.get(loc) != null 
-                && grid.getOccupiedAdjacentLocations(loc).size() == 3 
-                || grid.getOccupiedAdjacentLocations(loc).size() == 2)
+                else if (grid.get(loc) == null 
+                && grid.getOccupiedAdjacentLocations(loc).size() == 3)
                 {
                     Rock newRock = new Rock();
                     newGrid.put(loc,newRock);
