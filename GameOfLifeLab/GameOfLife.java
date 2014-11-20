@@ -6,6 +6,7 @@ import info.gridworld.grid.Grid;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
 
+
 /**
  * Game of Life starter code. Demonstrates how to create and populate the game using the GridWorld framework.
  * Also demonstrates how to provide accessor methods to make the class testable by unit tests.
@@ -119,7 +120,6 @@ public class GameOfLife
      *
      * @pre     the game has been initialized
      * @post    the world has been populated with a new grid containing the next generation
-     * 
      */
     public void createNextGeneration()
     {
@@ -141,16 +141,16 @@ public class GameOfLife
             for(int numCol=0; numCol<grid.getNumCols();numCol++)
             {
                 Location loc = new Location(numRow,numCol);
-                
+
                 if (grid.get(loc) != null
                 && (grid.getOccupiedAdjacentLocations(loc).size() > 3 
-                || grid.getOccupiedAdjacentLocations(loc).size() < 2))
+                    || grid.getOccupiedAdjacentLocations(loc).size() < 2))
                 {
                     newGrid.remove(loc);
                 }
                 else if (grid.get(loc) != null 
                 && (grid.getOccupiedAdjacentLocations(loc).size() == 3 
-                || grid.getOccupiedAdjacentLocations(loc).size() == 2))
+                    || grid.getOccupiedAdjacentLocations(loc).size() == 2))
                 {
                     Rock newRock = new Rock();
                     newGrid.put(loc,newRock);
