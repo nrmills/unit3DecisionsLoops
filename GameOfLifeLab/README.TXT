@@ -1,3 +1,31 @@
+Finalized Requirements:
+Q1: How large is the Grid? Is it boundless?
+A1: 36x36, no.
+
+Q2: What do the live cells look like?
+A2: Black Blips.
+
+Q3: What do dead cells look like? 
+A3: Null, or a blank box
+
+Q4: What pattern is displayed? are multiple patterns available?
+are patterns chosen in code, chosen randomly, chosen by user?
+A4: One pattern available
+
+Q5: How long does the game run? does it run forever? Does it prompt
+the user to continue?
+A5: My game of life runs for 50 iterations
+
+Q6: What is the time interval between generations?
+A6: .5 Second Interval.
+
+Q7: What about edge cases? does it wrap around?
+A7: The edge is treated like the end of the world, cells cannot progress past it.
+
+
+
+
+
 Introduction
 
 The goal of this lab is to apply your understanding of decision and loop
@@ -66,6 +94,19 @@ Artifacts to Produce:
 	like or dislike and why? What was surprising or unexpected? What did you
 	learn? What questions do you still have? What advice would you offer next
 	year's students?
+	
+	Reflection:
+	I had a very interesting and fun experience with this Game of Life Lab. The most interesting
+	part of this lab was the brainstorming of the algorithm on paper, and testing my ideas on online
+	simulations of Game of Life. I liked the localization of the documentation onto the computer 
+	as opposed to looking for it online. While i didn't enjoy fine-tuning specific cases for the
+	unit test, i thoroughly enjoyed the challenge of creating the algorithm for making new 
+	generations. Another thing I disliked was the structuring of the grid (positioning of the
+	x, and y-axis) I found it to be counter intuitive and confusing when trying to specify
+	grid locations. The most unexpected problem that I had was trying to find the correct method to
+	update the grid object, then figuring out it was buried just a little deeper in the documentation
+	then I had looked. I dont have any standing questions- but my advice for students next year is the 
+	method to update the grid with the changes made by one's algorithm.
 
 
 Submission:

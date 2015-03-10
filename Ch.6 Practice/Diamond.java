@@ -13,9 +13,9 @@ public class Diamond
         {
             int rowNum = 1;
             int spc;
-            int y = 0;
+            int y = 1;
             int numA = 1;
-            System.out.print("Enter the Desired Width of the Diamond: ");
+            System.out.print("Enter the Desired Width of the Diamond (Must Be an Odd Number: ");
             int width = input.nextInt();
             if (width % 2 == 0 && (width/2)%2 == 0)
             {
@@ -26,15 +26,15 @@ public class Diamond
                 spc = (width-1)/2;
             }
 
-            while(rowNum<width)
+            while(rowNum<width+1)
             {
                 //Prints the spaces before the asterisks
                 for(int x=1;x<=spc;x++)
                 {
-                    System.out.print(" ");
+                    System.out.print("-");
                 }
                 //Prints asterisks
-                while(y < numA)
+                while(y <= numA)
                 {
                     System.out.print("*");
                     y++;
@@ -42,7 +42,7 @@ public class Diamond
                 //Prints the spaces after the asterisks
                 for(int z=1;z<=spc;z++)
                 {
-                    System.out.print(" ");
+                    System.out.print("-");
                 }
                 System.out.println();
                 if (rowNum >= width/2)
